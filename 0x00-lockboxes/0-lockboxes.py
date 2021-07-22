@@ -12,7 +12,7 @@ def canUnlockAll(boxes):
     - A key with the same number as a box opens that box
     """
 
-    if len(boxes) == 0:
+    if len(boxes) == 0 or type(boxes) != list:
         return False
 
     keys = [0]

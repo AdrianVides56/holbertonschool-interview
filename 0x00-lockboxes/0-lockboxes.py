@@ -12,6 +12,9 @@ def canUnlockAll(boxes):
     - A key with the same number as a box opens that box
     """
 
+    if len(boxes) == 0:
+        return False
+
     keys = [0]
     for box in keys:
         for key in boxes[box]:

@@ -7,14 +7,18 @@
  */
 int is_palindrome(unsigned long n)
 {
-	char nstr[intLen(n) + 1];
-	int left = 0, right = intLen(n) - 1;
+	int left = 0, right = intLen(n) - 1, arr[intLen(n)];
 
-	snprintf(nstr, sizeof(nstr), "%ld", n); /* sprintf(buffer, "%ld", n); */
+	while (n)
+	{
+		arr[left++] = n % 10;
+		n /= 10;
+	}
 
+	left = 0;
 	while (left <= right)
 	{
-		if (nstr[left] != nstr[right])
+		if (arr[left] != arr[right])
 			return (0);
 		left++;
 		right--;

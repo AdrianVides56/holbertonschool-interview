@@ -10,8 +10,6 @@ int is_palindrome(unsigned long n)
 	char nstr[intLen(n) + 1];
 	int left = 0, right = intLen(n) - 1;
 
-	/*snprintf(nstr, sizeof(nstr), "%ld", n); /*sprintf(buffer, "%ld", n);*/
-
 	while (n)
 	{
 		nstr[left++] = n % 10;

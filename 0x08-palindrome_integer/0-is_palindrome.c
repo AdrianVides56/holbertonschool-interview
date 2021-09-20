@@ -7,7 +7,7 @@
  */
 int is_palindrome(unsigned long n)
 {
-	char nstr[intLen(n) + 1];
+	char nstr[20];
 	int left = 0, right = intLen(n) - 1;
 
 	while (n)

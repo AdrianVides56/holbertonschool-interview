@@ -33,5 +33,7 @@ void init_express(skiplist_t *list, size_t size);
 void free_skiplist(skiplist_t *list);
 void print_skiplist(const skiplist_t *list);
 skiplist_t *linear_skip(skiplist_t *list, int value);
+void check_found(skiplist_t *exp_lane, size_t left, size_t right);
+skiplist_t *linear_search(skiplist_t *left, int value);
 
 #endif /* _SEARCH_H_ */

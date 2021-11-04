@@ -15,7 +15,8 @@ skiplist_t *linear_search(skiplist_t *left, int value)
 
 	while (node)
 	{
-		printf("Value checked at index [%ld] = [%d]\n", node->index, node->n);
+		printf("Value checked at index [%ld] = [%d]\n",
+		       node->index, node->n);
 		if (node->n == value)
 			return (node);
 		node = node->next;
@@ -62,7 +63,8 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 					exp_lane->index, exp_lane->n);
 			if (exp_lane->n >= value)
 			{
-				check_found(NULL, linear->index, exp_lane->index);
+				check_found(NULL, linear->index,
+					    exp_lane->index);
 				return (linear_search(linear, value));
 			}
 			if (!exp_lane->express)

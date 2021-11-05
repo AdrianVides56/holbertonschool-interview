@@ -19,7 +19,7 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 		if (exp_lane)
 		{
 			printf("Value checked at index [%ld] = [%d]\n",
-					exp_lane->index, exp_lane->n);
+			       exp_lane->index, exp_lane->n);
 			if (exp_lane->n >= value)
 			{
 				check_found(NULL, linear->index,

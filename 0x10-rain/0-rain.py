@@ -8,28 +8,28 @@ square units of water will be retained after it rains.
 
 
 def rain(walls):
-	"""
-	calculate how many square units of water will be retained after it rains.
-	"""
-	if len(walls) == 0:
-		return 0
+        """
+        calculate how many square units of water will be retained after rain
+        """
+        if len(walls) == 0:
+                return 0
 
-	res, lWall, rWall, empty = 0, 0, 0, 0
-	i, j = 0, 0
+        res, lWall, rWall, empty = 0, 0, 0, 0
+        i, j = 0, 0
 
-	while i < len(walls):
-		if walls[i] == 0:
-			i += 1
-			continue
-		else:
-			lWall = walls[i]
-			j = i + 1
-			while j < len(walls) - 1 and walls[j] == 0:
-				empty += 1
-				j += 1
-				rWall = walls[j]
-			res += empty * min(lWall, rWall)
-		empty = 0
-		i += 1
+        while i < len(walls):
+                if walls[i] == 0:
+                        i += 1
+                        continue
+                else:
+                        lWall = walls[i]
+                        j = i + 1
+                        while j < len(walls) - 1 and walls[j] == 0:
+                                empty += 1
+                                j += 1
+                                rWall = walls[j]
+                        res += empty * min(lWall, rWall)
+                empty = 0
+                i += 1
 
-	return res
+        return res

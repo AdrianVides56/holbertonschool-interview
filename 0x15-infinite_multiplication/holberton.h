@@ -7,10 +7,9 @@
 #include <unistd.h>
 
 /* Function Prototypes */
-void _puts(char *str);
-int _is_digit(char *str);
+long long int _is_digit(char *str);
 void _error(void);
-void to_string(int num, char *str);
+void to_string(long long int num, char *str);
 int _putchar(char c);
 
 #endif /* HBTN_H */

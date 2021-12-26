@@ -8,7 +8,7 @@
  */
 int main(int ac, char *av[])
 {
-	int mul = 0, strlen = 1, aux = 0;
+	long long int mul = 0, strlen = 1, aux = 0;
 	char *rev, *res;
 
 	if (ac != 3)
@@ -38,11 +38,11 @@ int main(int ac, char *av[])
 /**
  * _is_digit - checks if a char is a digit
  * @str: string to check
- * Return: int of str
+ * Return: long long int of str
  */
-int _is_digit(char *str)
+long long int _is_digit(char *str)
 {
-	int res = 0, i = 0;
+	long long int res = 0, i = 0;
 
 	for (i = 0; str[i]; i++)
 	{
@@ -55,12 +55,12 @@ int _is_digit(char *str)
 }
 
 /**
- * to_string - converts a positive int to a string
+ * to_string - converts a positive long long int to a string
  * @num: number to convert
  * @str: string to store the result
  * Return: string of num
  */
-void to_string(int num, char *str)
+void to_string(long long int num, char *str)
 {
 	while (num != 0)
 	{
@@ -71,20 +71,10 @@ void to_string(int num, char *str)
 }
 
 /**
- * _puts - prints a string
- * @str: the string to be printed
- */
-void _puts(char *str)
-{
-	for (int i = 0; str[i]; i++)
-		write(1, &str[i], 1);
-}
-
-/**
- * _error - prints an error message
+ * _error - prlong long ints an error message
  */
 void _error(void)
 {
-	_puts("Error\n");
+	write(1, "Error\n", 6);
 	exit(98);
 }

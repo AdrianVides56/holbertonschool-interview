@@ -1,15 +1,15 @@
 #include "holberton.h"
 
 /**
- * main - multiplies two numbers
+ * main - multiplies two positive numbers
  * @ac: count of arguments to multiply
  * @av: numbers to multiply
  * Return: 0 if succes, 98 if fails
  */
 int main(int ac, char *av[])
 {
-	int mul = 0, strlen = 0;
-	char *res, *str;
+	int mul = 0, strlen = 1, aux = 0;
+	char *rev, *res;
 
 	if (ac != 3)
 		_error();
@@ -17,19 +17,21 @@ int main(int ac, char *av[])
 	mul = _is_digit(av[1]);
 	mul *= _is_digit(av[2]);
 
-	res = to_string(mul);
-	for (mul = 0; res[mul]; mul++)
+	aux = mul;
+	while (aux /= 10)
 		strlen++;
-	str = malloc(sizeof(char) * (strlen + 1));
-	mul = 0;
-	for (strlen--; strlen >= 0; strlen--)
-	{
-		str[mul] = res[strlen];
-		mul++;
-	}
 
-	write(1, str, mul);
+	rev = malloc(sizeof(char) * strlen + 1);
+	res = malloc(sizeof(char) * strlen + 1);
+	to_string(mul, rev);
+	for (aux = 0; aux < strlen; aux++)
+		res[aux] = rev[strlen - aux - 1];
+
+	write(1, res, strlen);
 	write(1, "\n", 1);
+
+	free(res);
+	free(rev);
 	return (0);
 }
 
@@ -40,62 +42,32 @@ int main(int ac, char *av[])
  */
 int _is_digit(char *str)
 {
-	int res = 0, i = 0, isNegative = 0;
+	int res = 0, i = 0;
 
-	if (str[0] == '-')
+	for (i = 0; str[i]; i++)
 	{
-		i = 1;
-		isNegative = 1;
-	}
-	for (; str[i]; i++)
-	{
-		if ((str[i] < '0' || str[i] > '9') && str[i] != '-')
+		if (str[i] < '0' || str[i] > '9')
 			_error();
 		res = (res * 10) + str[i] - '0';
 	}
-	if (isNegative)
-		return (-res);
-	else
-		return (res);
+
+	return (res);
 }
 
 /**
- * to_string - converts an int to a string
+ * to_string - converts a positive int to a string
  * @num: number to convert
+ * @str: string to store the result
  * Return: string of num
  */
-char *to_string(int num)
+void to_string(int num, char *str)
 {
-	int len = 0, aux = num;
-	char *str;
-
-	while (aux != 0)
+	while (num != 0)
 	{
-		len++;
-		aux /= 10;
-	}
-
-	if (num < 0)
-	{
-		len += 1;
-		str = malloc((sizeof(char) * len) + 1);
-		str[0] = '-';
-		aux = 1;
-		num *= -1;
-	}
-	else
-	{
-		str = malloc(sizeof(char) * len);
-		aux = 0;
-	}
-
-	for (; aux < len; aux++)
-	{
-		str[aux] = num % 10 + '0';
+		*str++ = num % 10 + '0';
 		num /= 10;
 	}
-
-	return (str);
+	*str++ = '\0';
 }
 
 /**

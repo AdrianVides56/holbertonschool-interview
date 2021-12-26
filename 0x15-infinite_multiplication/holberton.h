@@ -10,6 +10,7 @@
 void _puts(char *str);
 int _is_digit(char *str);
 void _error(void);
-char *to_string(int num);
+void to_string(int num, char *str);
+int _putchar(char c);
 
 #endif /* HBTN_H */

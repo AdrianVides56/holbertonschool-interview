@@ -1,4 +1,6 @@
 #include "holberton.h"
+#include <string.h>
+#include <stdio.h>
 
 /**
  * main - multiplies two positive numbers
@@ -8,70 +10,84 @@
  */
 int main(int ac, char *av[])
 {
-	long long int mul = 0, strlen = 1, aux = 0;
-	char *rev, *res;
+	char *cmd, buf[1000];
+	FILE *fd;
 
-	if (ac != 3)
+	if (ac != 3 || _is_digit(av[1]) == 0 || _is_digit(av[2]) == 0)
 		_error();
 
-	mul = _is_digit(av[1]);
-	mul *= _is_digit(av[2]);
+	cmd = malloc(sizeof(char) * (strlen(av[1]) + strlen(av[2]) + 16));
 
-	aux = mul;
-	while (aux /= 10)
-		strlen++;
+	create_command(av[1], av[2], cmd);
 
-	rev = malloc(sizeof(char) * strlen + 1);
-	res = malloc(sizeof(char) * strlen + 1);
-	to_string(mul, rev);
-	for (aux = 0; aux < strlen; aux++)
-		res[aux] = rev[strlen - aux - 1];
+	fd = popen(cmd, "r");
+	if (fd != NULL)
+	{
+		while (fgets(buf, 1000, fd) != NULL)
+			printf("%s", buf);
+		pclose(fd);
+	}
 
-	write(1, res, strlen);
-	write(1, "\n", 1);
+	free(cmd);
 
-	free(res);
-	free(rev);
 	return (0);
 }
 
 /**
  * _is_digit - checks if a char is a digit
  * @str: string to check
- * Return: long long int of str
+ * Return: 1 if str is a digit, 0 if not
  */
-long long int _is_digit(char *str)
+int _is_digit(char *str)
 {
-	long long int res = 0, i = 0;
+	int i = 0;
 
-	for (i = 0; str[i]; i++)
+	for (; str[i]; i++)
 	{
 		if (str[i] < '0' || str[i] > '9')
-			_error();
-		res = (res * 10) + str[i] - '0';
+			return (0);
 	}
 
-	return (res);
+	return (1);
 }
 
 /**
- * to_string - converts a positive long long int to a string
- * @num: number to convert
- * @str: string to store the result
- * Return: string of num
+ * create_command - creates the bc command to execute
+ * @num1: first number to multiply
+ * @num2: second number to multiply
+ * @cmd: command to execute
+ * Return: pointer to the command
  */
-void to_string(long long int num, char *str)
+void create_command(char *num1, char *num2, char *cmd)
 {
-	while (num != 0)
-	{
-		*str++ = num % 10 + '0';
-		num /= 10;
-	}
-	*str++ = '\0';
+	char echo[] = "echo ", bc[] = " | bc\n";
+	int i = 0, j = 0;
+
+	for (; echo[i]; i++)
+		cmd[i] = echo[i];
+
+	cmd[i++] = '\"';
+
+	for (; num1[j]; j++)
+		cmd[i++] = num1[j];
+
+	cmd[i++] = '*';
+	j = 0;
+
+	for (; num2[j]; j++)
+		cmd[i++] = num2[j];
+
+	cmd[i++] = '\"';
+	j = 0;
+
+	for (; bc[j]; j++)
+		cmd[i++] = bc[j];
+
+	cmd[i++] = '\0';
 }
 
 /**
- * _error - prlong long ints an error message
+ * _error - prints an error message
  */
 void _error(void)
 {

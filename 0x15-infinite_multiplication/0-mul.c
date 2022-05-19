@@ -45,7 +45,11 @@ int _is_digit(char *str)
 	for (; str[i]; i++)
 	{
 		if (str[i] < '0' || str[i] > '9')
+		{
+			if (str[i] == '.')
+				continue;
 			return (0);
+		}
 	}
 
 	return (1);

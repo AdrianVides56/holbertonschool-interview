@@ -24,7 +24,7 @@ int main(int ac, char *av[])
 	if (fd != NULL)
 	{
 		while (fgets(buf, 1000, fd) != NULL)
-			printf("%s", buf);
+			write(STDOUT_FILENO, buf, strlen(buf));
 		pclose(fd);
 	}
 

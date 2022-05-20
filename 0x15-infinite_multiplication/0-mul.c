@@ -24,7 +24,12 @@ int main(int ac, char *av[])
 	if (fd != NULL)
 	{
 		while (fgets(buf, 1000, fd) != NULL)
+		{
+			remove_char(buf, '\\');
+			remove_char(buf, '\n');
 			write(STDOUT_FILENO, buf, strlen(buf));
+		}
+		write(STDOUT_FILENO, "\n", 1);
 		pclose(fd);
 	}
 
@@ -97,4 +102,24 @@ void _error(void)
 {
 	write(1, "Error\n", 6);
 	exit(98);
+}
+
+/**
+ * remove_char - removes a char from a string
+ * @str: string to remove from
+ * @c: char to remove
+ */
+void remove_char(char *str, char c)
+{
+	int i = 0, j = 0;
+
+	while (str[i])
+	{
+		if (str[i] == c)
+			i++;
+		else
+			str[j++] = str[i++];
+	}
+
+	str[j] = '\0';
 }

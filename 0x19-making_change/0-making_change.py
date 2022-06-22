@@ -3,8 +3,6 @@
 Solution of the problem
 """
 
-from audioop import reverse
-
 
 def makeChange(coins, total):
     """determine the fewest number of coins needed to meet a given amount"""

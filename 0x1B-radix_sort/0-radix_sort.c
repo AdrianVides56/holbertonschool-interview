@@ -29,7 +29,7 @@ void radix_sort(int *array, size_t size)
 void count_sort(int *array, size_t size, int exp)
 {
 	int *output;
-	int i = 0, count[10] = {0};
+	int i = 0, count[__INT16_MAX__] = {0};
 	size_t j = 0;
 
 	output = malloc(sizeof(int) * size);

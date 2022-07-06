@@ -10,6 +10,9 @@ void radix_sort(int *array, size_t size)
 	int m = get_max(array, size);
 	int exp = 0;
 
+	if (!array || size < 2)
+		return;
+
 	for (exp = 1; m / exp > 0; exp *= 10)
 	{
 		count_sort(array, size, exp);

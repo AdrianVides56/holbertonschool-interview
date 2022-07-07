@@ -4,6 +4,7 @@
 /* Library includes */
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 /* Function declarations */
 void print_array(const int *array, size_t size);
